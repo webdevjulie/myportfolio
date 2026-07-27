@@ -1,6 +1,6 @@
 <section
   id="home"
-  class="relative min-h-[calc(100vh-2rem)] flex items-center overflow-hidden px-6 py-20 bg-black relative overflow-visible"
+  class="relative min-h-[calc(100vh)] flex items-center overflow-hidden px-6 py-20 bg-black relative overflow-visible"
 >
   <div class="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center lg:grid-cols-[1fr_auto_1fr]">
 
@@ -18,27 +18,28 @@
       </h1>
     </div>
 
+    <!-- IMAGE -->
     <div class="order-2 z-10 -my-16 flex justify-center lg:col-start-2">
-  <div class="relative">
-    <!-- Glow -->
-    <div class="absolute inset-0 -z-10 rounded-full bg-blue-500/30 blur-[120px] scale-150"></div>
+      <div class="relative">
+        <!-- Glow -->
+        <div class="absolute inset-0 -z-10 rounded-full bg-blue-500/30 blur-[120px] scale-150"></div>
 
-    <img
-      src={`${import.meta.env.BASE_URL}profile.png`}
-      alt="Julie Anne"
-      class="h-[36rem] sm:h-[38rem] lg:h-[44rem] w-auto object-contain relative z-10 fade-bottom"
-      loading="eager"
-      fetchpriority="high"
-    />
-  </div>
-</div>
+        <img
+          src={`${import.meta.env.BASE_URL}profile.png`}
+          alt="Julie Anne"
+          class="h-[36rem] sm:h-[38rem] lg:h-[44rem] w-auto object-contain relative z-10 fade-bottom"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+    </div>
 
-<style>
-  .fade-bottom {
-    -webkit-mask-image: linear-gradient(to bottom, black 92%, transparent 100%);
-    mask-image: linear-gradient(to bottom, black 92%, transparent 100%);
-  }
-</style>
+    <style>
+      .fade-bottom {
+        -webkit-mask-image: linear-gradient(to bottom, black 92%, transparent 100%);
+        mask-image: linear-gradient(to bottom, black 92%, transparent 100%);
+      }
+    </style>
 
     <!-- RIGHT TEXT -->
     <div class="text-center lg:text-right order-3 z-20 lg:col-start-3">
@@ -56,66 +57,10 @@
       </p>
     </div>
 
-    <!-- MOBILE / TABLET: Social + Resume (visible below lg) -->
-    <div class="order-4 flex flex-col items-center gap-6 mt-10 lg:hidden">
-      <div class="flex gap-4">
-        <!-- LinkedIn -->
-        <a
-          href="https://www.linkedin.com/in/julie-anne-de-los-reyes-7281b72b4"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="LinkedIn"
-          class="glass-button flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 text-white hover:-translate-y-1 hover:border-blue-400 hover:text-blue-400 transition"
-        >
-          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M6.94 8.5A1.56 1.56 0 1 0 6.94 5.38a1.56 1.56 0 0 0 0 3.12ZM5.5 9.5h2.88V18H5.5zM10.5 9.5h2.76v1.16h.04c.38-.72 1.31-1.48 2.7-1.48 2.88 0 3.41 1.89 3.41 4.35V18H16.5v-7.68c0-1.83-.03-4.18-2.55-4.18-2.55 0-2.94 1.99-2.94 4.04V18H10.5z"/>
-          </svg>
-        </a>
-
-        <!-- Email -->
-        <a
-          href="mailto:delosreyesjulieanne199@gmail.com"
-          aria-label="Email"
-          class="glass-button flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 text-white hover:-translate-y-1 hover:border-blue-400 hover:text-blue-400 transition"
-        >
-          <svg
-            class="h-6 w-6"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"
-          >
-            <path d="M4 6h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1Z"/>
-            <path d="m5 8 7 5 7-5"/>
-          </svg>
-        </a>
-      </div>
-
-      <!-- Resume -->
-      <a
-        href={`${import.meta.env.BASE_URL}DELOSREYES-CV.pdf`}
-        target="_blank"
-        class="glass-button flex items-center gap-3 rounded-2xl border border-blue-400 px-6 py-4 font-bold uppercase tracking-[0.25em] text-white hover:bg-blue-500/20 transition"
-      >
-        RESUME
-        <svg
-          class="h-5 w-5"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-        >
-          <path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7z"/>
-          <path d="M14 2v5h5"/>
-        </svg>
-      </a>
-    </div>
-
   </div>
 
-  <!-- DESKTOP: Social Icons (bottom-left, lg and up) -->
-  <div class="absolute bottom-8 left-8 hidden lg:flex flex-col gap-4">
-
+  <!-- SOCIAL + RESUME: centered at the very bottom of the section -->
+  <div class="absolute bottom-15 left-1/2 z-20 flex -translate-x-1/2 items-center gap-4">
     <!-- LinkedIn -->
     <a
       href="https://www.linkedin.com/in/julie-anne-de-los-reyes-7281b72b4"
@@ -146,12 +91,10 @@
         <path d="m5 8 7 5 7-5"/>
       </svg>
     </a>
-  </div>
 
-  <!-- DESKTOP: Resume (bottom-right, lg and up) -->
-  <div class="absolute bottom-8 right-8 hidden lg:block">
+    <!-- Resume -->
     <a
-      href="/DELOSREYES-CV.pdf"
+      href={`${import.meta.env.BASE_URL}DELOSREYES-CV.pdf`}
       target="_blank"
       class="glass-button flex items-center gap-3 rounded-2xl border border-blue-400 px-6 py-4 font-bold uppercase tracking-[0.25em] text-white hover:bg-blue-500/20 transition"
     >
@@ -168,5 +111,4 @@
       </svg>
     </a>
   </div>
-
 </section>

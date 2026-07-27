@@ -6,6 +6,10 @@ export default defineConfig({
   site: "https://webdevjulie.github.io",
   base: "/myportfolio/",
 
+  devToolbar: {
+    enabled: false,
+  },
+
   integrations: [react()],
 
   vite: {
