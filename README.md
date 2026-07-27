@@ -1,46 +1,75 @@
-# Astro Starter Kit: Basics
+# Julie Anne De Los Reyes | Portfolio
 
-```sh
-npm create astro@latest -- --template basics
-```
+A modern, professional portfolio website built with Astro and Tailwind CSS. The site showcases the developer's background, skills, projects, services, FAQs, and contact information in a polished and responsive layout.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## What was built
 
-## 🚀 Project Structure
+- Personal portfolio landing page with a refined hero section
+- Sticky navigation bar with smooth section links
+- About section with a cleaner professional layout
+- Skills section with technology badges and icons
+- Projects section featuring multiple completed projects and links
+- Services section highlighting web design, development, mobile apps, UI/UX, and API integration
+- FAQ section with interactive accordion behavior
+- Contact section with email, phone, location, and social links
+- Footer with quick navigation links
 
-Inside of your Astro project, you'll see the following folders and files:
+## Design updates made
+
+- Replaced starter content with custom portfolio content
+- Applied a more professional visual style
+- Added a glassmorphism/liquid-glass effect for buttons and cards
+- Adjusted spacing and hero layout to sit better under the navbar
+- Removed the default Astro starter demo UI and Astro branding from the page
+- Updated the browser tab title to reflect the portfolio owner’s name
+
+## Tech stack
+
+- Astro
+- Tailwind CSS
+- HTML/CSS/JavaScript
+- Responsive UI design
+
+## Project structure
 
 ```text
 /
 ├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
+├── src/
+│   ├── components/
+│   │   ├── About.astro
+│   │   ├── Contact.astro
+│   │   ├── Faqs.astro
+│   │   ├── Footer.astro
+│   │   ├── Hero.astro
+│   │   ├── Navbar.astro
+│   │   ├── Projects.astro
+│   │   ├── Services.astro
+│   │   ├── Skills.astro
+│   ├── layouts/
+│   │   └── Layout.astro
+│   └── pages/
+│       └── index.astro
 └── package.json
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Commands
 
-## 🧞 Commands
+Run these from the project root:
 
-All commands are run from the root of the project, from a terminal:
+```sh
+npm install
+npm run dev
+npm run build
+npm run preview
+```
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## Run locally
 
-## 👀 Want to learn more?
+1. Install dependencies with `npm install`
+2. Start the development server with `npm run dev`
+3. Open `http://localhost:4321/` in your browser
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## Notes
+
+This project was customized from the Astro starter template into a personal portfolio website with a professional layout, improved UX, and polished section content.

@@ -1,0 +1,212 @@
+<style>
+  .dark-blue { background: #0a0e1a; }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-fade-in-up {
+    opacity: 0;
+    animation: fadeInUp 0.7s ease-out forwards;
+  }
+
+  .delay-100  { animation-delay: 0.10s; }
+  .delay-200  { animation-delay: 0.20s; }
+  .delay-300  { animation-delay: 0.30s; }
+  .delay-400  { animation-delay: 0.40s; }
+  .delay-500  { animation-delay: 0.50s; }
+  .delay-600  { animation-delay: 0.60s; }
+  .delay-700  { animation-delay: 0.70s; }
+  .delay-800  { animation-delay: 0.80s; }
+  .delay-900  { animation-delay: 0.90s; }
+  .delay-1000 { animation-delay: 1.00s; }
+  .delay-1100 { animation-delay: 1.10s; }
+  .delay-1200 { animation-delay: 1.20s; }
+  .delay-1300 { animation-delay: 1.30s; }
+  .delay-1400 { animation-delay: 1.40s; }
+  .delay-1500 { animation-delay: 1.50s; }
+  .delay-1600 { animation-delay: 1.60s; }
+  .delay-1700 { animation-delay: 1.70s; }
+
+  /* iPhone-style glass card */
+  .glass-card {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 22px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.2),
+    inset 0 1px 1px rgba(255, 255, 255, 0.6),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Specular highlight sa taas - yung signature "glass shine" ng iOS */
+.glass-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.35),
+    rgba(255, 255, 255, 0) 100%
+  );
+  border-radius: 22px 22px 0 0;
+  pointer-events: none;
+}
+
+.glass-card:hover {
+  transform: translateY(-6px) scale(1.04);
+  background: rgba(255, 255, 255, 0.35);
+  box-shadow:
+    0 12px 40px rgba(34, 211, 238, 0.3),
+    inset 0 1px 1px rgba(255, 255, 255, 0.7),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.15);
+}
+  .fade-in {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  /* Video background */
+  .video-bg-section {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .video-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+
+  .video-bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 14, 26, 0.72);
+    z-index: 1;
+  }
+
+  .video-bg-section > .content-layer {
+    position: relative;
+    z-index: 2;
+  }
+</style>
+
+<section id="skills" class="py-20 video-bg-section">
+  <video class="video-bg" autoplay muted loop playsinline>
+    <source src="/public/VID.mp4" type="video/mp4" />
+  </video>
+  <div class="video-bg-overlay"></div>
+
+  <div class="max-w-7xl mx-auto px-6 content-layer">
+    <div class="text-center mb-16 fade-in">
+      <h2 class="mb-6 text-4xl font-bold md:text-5xl text-white">
+        TECH <span class="text-cyan-400">STACK</span>
+      </h2>
+    </div>
+
+    <!-- Pyramid layout: 8 / 5 / 3 / 1 (widest row on top) -->
+    <div class="flex flex-col items-center gap-10">
+
+      <!-- Row 1 -->
+      <div class="flex flex-wrap justify-center gap-8">
+        <div class="glass-card flex flex-col items-center animate-fade-in-up delay-100 w-28 h-28 justify-center">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5 Logo" class="w-12 h-12 object-contain" />
+          <p class="text-gray-300 mt-2 text-xs">HTML5</p>
+        </div>
+        <div class="glass-card flex flex-col items-center animate-fade-in-up delay-200 w-28 h-28 justify-center">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3 Logo" class="w-12 h-12 object-contain" />
+          <p class="text-gray-300 mt-2 text-xs">CSS3</p>
+        </div>
+        <div class="glass-card flex flex-col items-center animate-fade-in-up delay-300 w-28 h-28 justify-center">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript Logo" class="w-12 h-12 object-contain" />
+          <p class="text-gray-300 mt-2 text-xs">JavaScript</p>
+        </div>
+        <div class="glass-card flex flex-col items-center animate-fade-in-up delay-400 w-28 h-28 justify-center">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React Logo" class="w-12 h-12 object-contain" />
+          <p class="text-gray-300 mt-2 text-xs">React</p>
+        </div>
+        <div class="glass-card flex flex-col items-center animate-fade-in-up delay-500 w-28 h-28 justify-center">
+          <img src="https://astro.build/assets/press/astro-icon-light.svg" alt="Astro Logo" class="w-12 h-12 object-contain" />
+          <p class="text-gray-300 mt-2 text-xs">Astro</p>
+        </div>
+        <div class="glass-card flex flex-col items-center animate-fade-in-up delay-600 w-28 h-28 justify-center">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="Flutter Logo" class="w-12 h-12 object-contain" />
+          <p class="text-gray-300 mt-2 text-xs">Flutter</p>
+        </div>
+        <div class="glass-card flex flex-col items-center animate-fade-in-up delay-700 w-28 h-28 justify-center">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg" alt="Dart Logo" class="w-12 h-12 object-contain" />
+          <p class="text-gray-300 mt-2 text-xs">Dart</p>
+        </div>
+        <div class="glass-card flex flex-col items-center animate-fade-in-up delay-800 w-28 h-28 justify-center">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" alt="Bootstrap Logo" class="w-12 h-12 object-contain" />
+          <p class="text-gray-300 mt-2 text-xs">Bootstrap</p>
+        </div>
+      </div>
+
+      <!-- Row 2 -->
+      <div class="flex flex-wrap justify-center gap-8">
+        <div class="glass-card flex flex-col items-center animate-fade-in-up delay-900 w-28 h-28 justify-center">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind CSS Logo" class="w-12 h-12 object-contain" />
+          <p class="text-gray-300 mt-2 text-xs">TailwindCSS</p>
+        </div>
+        <div class="glass-card flex flex-col items-center animate-fade-in-up delay-1000 w-28 h-28 justify-center">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js Logo" class="w-12 h-12 object-contain" />
+          <p class="text-gray-300 mt-2 text-xs">Node.js</p>
+        </div>
+        <div class="glass-card flex flex-col items-center animate-fade-in-up delay-1100 w-28 h-28 justify-center">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP Logo" class="w-12 h-12 object-contain" />
+          <p class="text-gray-300 mt-2 text-xs">PHP</p>
+        </div>
+        <div class="glass-card flex flex-col items-center animate-fade-in-up delay-1200 w-28 h-28 justify-center">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL Logo" class="w-12 h-12 object-contain" />
+          <p class="text-gray-300 mt-2 text-xs">MySQL</p>
+        </div>
+        <div class="glass-card flex flex-col items-center animate-fade-in-up delay-1300 w-28 h-28 justify-center">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git Logo" class="w-12 h-12 object-contain" />
+          <p class="text-gray-300 mt-2 text-xs">Git</p>
+        </div>
+      </div>
+
+      <!-- Row 3 -->
+      <div class="flex flex-wrap justify-center gap-8">
+        <div class="glass-card flex flex-col items-center animate-fade-in-up delay-1400 w-28 h-28 justify-center">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma Logo" class="w-12 h-12 object-contain" />
+          <p class="text-gray-300 mt-2 text-xs">Figma</p>
+        </div>
+        <div class="glass-card flex flex-col items-center animate-fade-in-up delay-1500 w-28 h-28 justify-center">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" alt="C Logo" class="w-12 h-12 object-contain" />
+          <p class="text-gray-300 mt-2 text-xs">C</p>
+        </div>
+        <div class="glass-card flex flex-col items-center animate-fade-in-up delay-1600 w-28 h-28 justify-center">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++ Logo" class="w-12 h-12 object-contain" />
+          <p class="text-gray-300 mt-2 text-xs">C++</p>
+        </div>
+      </div>
+
+      <!-- Row 4 -->
+      <div class="flex flex-wrap justify-center gap-8">
+        <div class="glass-card flex flex-col items-center animate-fade-in-up delay-1700 w-28 h-28 justify-center">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase Logo" class="w-12 h-12 object-contain" />
+          <p class="text-gray-300 mt-2 text-xs">Firebase</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

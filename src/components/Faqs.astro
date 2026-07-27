@@ -1,0 +1,112 @@
+---
+const faqs = [
+  {
+    question: "What services do you offer?",
+    answer:
+      "I offer web design, web development, mobile app development, UI/UX prototyping, and API integration services.",
+  },
+  {
+    question: "Do you work on freelance projects?",
+    answer:
+      "Yes! I am open to freelance work and collaboration on both small and large-scale projects.",
+  },
+  {
+    question: "What technologies do you specialize in?",
+    answer:
+      "I specialize in HTML, CSS, JavaScript, Astro, React, Node.js, PHP, MySQL, and Flutter/Dart for mobile development.",
+  },
+  {
+    question: "How can I get in touch with you?",
+    answer:
+      "You can reach me through the contact section or email me at delosreyesjulieanne199@gmail.com.",
+  },
+  {
+    question: "What project impact have you created?",
+    answer:
+      "I built an Investment and Laundry Booking System that simplified bookings, payments, and investor records for the business.",
+  },
+  {
+    question: "Do you provide support after completion?",
+    answer:
+      "Yes! I offer post-launch support, bug fixes, updates, and minor improvements to keep your project running smoothly.",
+  },
+  {
+    question: "Can you optimize my website for SEO?",
+    answer:
+      "Absolutely! I can apply SEO best practices such as meta tags, content structure, and site optimization to improve visibility.",
+  },
+  {
+    question: "Do you build mobile apps too?",
+    answer: "Yes! I build mobile apps using Flutter and Dart for both Android and iOS.",
+  },
+  {
+    question: "Can you create responsive websites?",
+    answer:
+      "Absolutely! All websites I build are responsive and optimized for mobile, tablet, and desktop devices.",
+  },
+  {
+    question: "How long does it take to complete a project?",
+    answer:
+      "Timelines vary by project scope, but small websites are often completed within 1–2 weeks and larger systems may take longer.",
+  },
+];
+---
+
+<section id="faqs" class="bg-slate-950/90 py-20">
+  <div class="mx-auto max-w-4xl px-6">
+    <div class="mb-16 text-center">
+      <h2 class="mb-6 text-4xl font-bold md:text-5xl">
+        Frequently Asked <span class="text-cyan-400">Questions</span>
+      </h2>
+      <div class="mx-auto h-1 w-20 rounded-full bg-cyan-500"></div>
+    </div>
+
+    <div class="space-y-6">
+      {faqs.map((faq, index) => (
+        <div class="faq-item glass-panel overflow-hidden rounded-2xl border border-white/15">
+          <button
+            class="faq-toggle flex w-full items-center justify-between p-6 text-left transition hover:bg-slate-900"
+            type="button"
+            aria-expanded="false"
+            aria-controls={`faq-panel-${index}`}
+          >
+            <span class="text-lg font-semibold">{faq.question}</span>
+            <span class="faq-icon text-2xl leading-none text-cyan-400">+</span>
+          </button>
+          <div id={`faq-panel-${index}`} class="faq-answer hidden px-6 pb-6 text-slate-400">
+            {faq.answer}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  document.querySelectorAll('.faq-toggle').forEach((button) => {
+    button.addEventListener('click', () => {
+      const item = button.closest('.faq-item');
+      const answer = item?.querySelector('.faq-answer');
+      const icon = button.querySelector('.faq-icon');
+      const isOpen = button.getAttribute('aria-expanded') === 'true';
+
+      document.querySelectorAll('.faq-item').forEach((entry) => {
+        const entryButton = entry.querySelector('.faq-toggle');
+        const entryAnswer = entry.querySelector('.faq-answer');
+        const entryIcon = entry.querySelector('.faq-icon');
+
+        if (entryButton && entryAnswer) {
+          entryAnswer.classList.add('hidden');
+          entryButton.setAttribute('aria-expanded', 'false');
+          if (entryIcon) entryIcon.textContent = '+';
+        }
+      });
+
+      if (answer && icon) {
+        answer.classList.toggle('hidden', isOpen);
+        button.setAttribute('aria-expanded', String(!isOpen));
+        icon.textContent = isOpen ? '+' : '−';
+      }
+    });
+  });
+</script>

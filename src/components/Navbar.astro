@@ -1,0 +1,188 @@
+<nav class="fixed top-4 left-1/2 z-50 w-[92%] max-w-5xl -translate-x-1/2 rounded-2xl border border-cyan-400/20 bg-slate-950/50 shadow-[0_0_40px_-15px_rgba(34,211,238,0.4)] backdrop-blur-2xl">
+  <div class="flex items-center justify-between px-6 py-3.5">
+    <a href="#home" class="group flex items-center gap-0.5 font-mono text-lg font-bold tracking-tight text-white">
+      <span class="text-cyan-400 transition-transform group-hover:-translate-x-0.5">&lt;</span>
+      JA
+      <span class="text-cyan-400 transition-transform group-hover:translate-x-0.5">/&gt;</span>
+    </a>
+
+    <div id="nav-links" class="relative hidden items-center gap-8 md:flex">
+      <a href="#about" class="nav-link" data-index="01"><span class="link-text">About</span></a>
+      <a href="#projects" class="nav-link" data-index="02"><span class="link-text">Projects</span></a>
+      <a href="#services" class="nav-link" data-index="03"><span class="link-text">Services</span></a>
+      <a href="#contact" class="nav-link" data-index="04"><span class="link-text">Contact</span></a>
+      <!-- <a href="#faqs" class="nav-link" data-index="05"><span class="link-text">FAQs</span></a> -->
+
+      <!-- shared morphing underline -->
+      <span id="magnetic-indicator" class="pointer-events-none absolute bottom-[-6px] left-0 h-[1.5px] w-0 rounded-full bg-cyan-400 opacity-0 shadow-[0_0_8px_1px_rgba(34,211,238,0.6)] transition-[opacity] duration-200"></span>
+    </div>
+
+    <!-- Mobile menu button -->
+    <button id="menu-btn" class="relative flex h-8 w-8 flex-col items-center justify-center gap-[5px] md:hidden" aria-label="Open menu" aria-expanded="false">
+      <span id="bar-top" class="h-[2px] w-6 origin-center rounded-full bg-cyan-400 transition-transform duration-300"></span>
+      <span id="bar-bottom" class="h-[2px] w-6 origin-center rounded-full bg-cyan-400 transition-transform duration-300"></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Fullscreen mobile overlay -->
+<div id="mobile-menu" class="pointer-events-none fixed inset-0 z-40 flex flex-col justify-center bg-slate-950/98 px-8 opacity-0 backdrop-blur-2xl transition-opacity duration-300 md:hidden">
+  <div class="flex flex-col gap-6">
+    <a href="#about" class="mobile-link" data-index="01">About</a>
+    <a href="#projects" class="mobile-link" data-index="02">Projects</a>
+    <a href="#services" class="mobile-link" data-index="03">Services</a>
+    <a href="#contact" class="mobile-link" data-index="04">Contact</a>
+    <!-- <a href="#faqs" class="mobile-link" data-index="05">FAQs</a> -->
+  </div>
+</div>
+
+<style>
+  .nav-link {
+    position: relative;
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1;
+    color: rgb(203 213 225);
+    isolation: isolate;
+  }
+  .nav-link::before {
+    content: attr(data-index);
+    font-family: monospace;
+    font-size: 0.65rem;
+    color: rgb(34 211 238 / 0.5);
+    transition: color 0.25s ease;
+  }
+  .nav-link:hover {
+    color: rgb(34 211 238);
+  }
+  .nav-link:hover::before {
+    color: rgb(34 211 238 / 0.9);
+  }
+  .link-text {
+    display: inline-block;
+    will-change: transform;
+    transition: transform 0.15s ease-out;
+  }
+
+  #magnetic-indicator {
+    transition: left 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                width 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                opacity 0.2s ease;
+  }
+
+  .mobile-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: monospace;
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .mobile-link::before {
+    content: attr(data-index);
+    font-size: 0.9rem;
+    color: rgb(34 211 238);
+  }
+  #mobile-menu.is-open .mobile-link {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .mobile-link:nth-child(1) { transition-delay: 0.05s; }
+  .mobile-link:nth-child(2) { transition-delay: 0.1s; }
+  .mobile-link:nth-child(3) { transition-delay: 0.15s; }
+  .mobile-link:nth-child(4) { transition-delay: 0.2s; }
+</style>
+
+<script>
+  // ---- Magnetic underline + text pull (desktop nav) ----
+  const navLinksContainer = document.getElementById('nav-links');
+  const indicator = document.getElementById('magnetic-indicator');
+
+  if (navLinksContainer && indicator) {
+    const links = Array.from(navLinksContainer.querySelectorAll<HTMLAnchorElement>('.nav-link'));
+    const MAGNET_STRENGTH = 0.25; // how much the text follows the cursor
+    const MAGNET_RADIUS = 60; // px, how far the pull reaches
+
+    const moveIndicatorTo = (el: HTMLElement) => {
+      const containerRect = navLinksContainer.getBoundingClientRect();
+      const rect = el.getBoundingClientRect();
+      indicator.style.left = `${rect.left - containerRect.left}px`;
+      indicator.style.width = `${rect.width}px`;
+      indicator.style.opacity = '1';
+    };
+
+    const hideIndicator = () => {
+      indicator.style.opacity = '0';
+    };
+
+    links.forEach(link => {
+      const textEl = link.querySelector<HTMLElement>('.link-text');
+
+      link.addEventListener('mouseenter', () => moveIndicatorTo(link));
+
+      link.addEventListener('mousemove', (e: MouseEvent) => {
+        if (!textEl) return;
+        const rect = link.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const dx = e.clientX - cx;
+        const dy = e.clientY - cy;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < MAGNET_RADIUS) {
+          const pull = 1 - dist / MAGNET_RADIUS;
+          textEl.style.transform = `translate(${dx * MAGNET_STRENGTH * pull}px, ${dy * MAGNET_STRENGTH * pull}px)`;
+        }
+      });
+
+      link.addEventListener('mouseleave', () => {
+        if (textEl) textEl.style.transform = 'translate(0, 0)';
+      });
+    });
+
+    navLinksContainer.addEventListener('mouseleave', hideIndicator);
+  }
+
+  // ---- Mobile menu ----
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const barTop = document.getElementById('bar-top');
+  const barBottom = document.getElementById('bar-bottom');
+
+  if (menuBtn && mobileMenu && barTop && barBottom) {
+    const closeMenu = () => {
+      mobileMenu.classList.remove('is-open');
+      mobileMenu.classList.add('pointer-events-none');
+      mobileMenu.style.opacity = '0';
+      barTop.style.transform = 'none';
+      barBottom.style.transform = 'none';
+      menuBtn.setAttribute('aria-expanded', 'false');
+    };
+
+    const openMenu = () => {
+      mobileMenu.classList.remove('pointer-events-none');
+      mobileMenu.style.opacity = '1';
+      void mobileMenu.offsetWidth;
+      mobileMenu.classList.add('is-open');
+      barTop.style.transform = 'translateY(3.5px) rotate(45deg)';
+      barBottom.style.transform = 'translateY(-3.5px) rotate(-45deg)';
+      menuBtn.setAttribute('aria-expanded', 'true');
+    };
+
+    menuBtn.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.contains('is-open');
+      isOpen ? closeMenu() : openMenu();
+    });
+
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+  }
+</script>

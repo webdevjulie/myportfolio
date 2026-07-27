@@ -1,0 +1,104 @@
+---
+---
+
+<div id="loading-screen" class="loading-screen">
+  <div class="loading-text-wrap">
+    <span class="loading-text">FULL STACK DEVELOPER</span>
+  </div>
+  <div class="loading-btn" aria-label="Loading">
+    <span class="loading-spinner"></span>
+  </div>
+</div>
+
+<style>
+  .loading-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    overflow: hidden;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+  }
+
+  .loading-screen.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .loading-text-wrap {
+    overflow: hidden;
+  }
+
+  .loading-text {
+    display: inline-block;
+    font-size: clamp(1.25rem, 4vw, 2.5rem);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: #fff;
+    text-transform: uppercase;
+    transform: translateX(-120%);
+    opacity: 0;
+    animation: slideIn 0.9s ease forwards;
+    animation-delay: 0.2s;
+  }
+
+  @keyframes slideIn {
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  .loading-btn {
+    width: 64px;
+    height: 64px;
+    border-radius: 9999px;
+    border: 2px solid #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0.6);
+    animation: popIn 0.5s ease forwards;
+    animation-delay: 1.2s;
+  }
+
+  @keyframes popIn {
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .loading-spinner {
+    width: 28px;
+    height: 28px;
+    border: 3px solid #000;
+    border-top: 3px solid #fff;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+</style>
+
+<script>
+  window.addEventListener("load", () => {
+    const loadingScreen = document.getElementById("loading-screen");
+    // extra delay so the whole sequence (text slide + spinner) is visible
+    setTimeout(() => {
+      loadingScreen?.classList.add("hide");
+      document.body.style.overflow = "auto";
+    }, 2200);
+  });
+</script>

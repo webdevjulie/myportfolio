@@ -1,0 +1,109 @@
+<section id="about" class="relative py-20 bg-black overflow-hidden">
+  <!-- soft glow orbs for depth/balance -->
+  <div class="pointer-events-none absolute -top-20 -right-20 h-72 w-72 rounded-full bg-blue-600/10 blur-3xl"></div>
+  <div class="pointer-events-none absolute -bottom-20 -left-20 h-72 w-72 rounded-full bg-blue-600/10 blur-3xl"></div>
+
+  <!-- scattered decorative dots -->
+  <div class="pointer-events-none absolute inset-0">
+    <span class="absolute left-[6%] top-[15%] h-1.5 w-1.5 rounded-full bg-blue-400/40"></span>
+    <span class="absolute left-[12%] top-[35%] h-1 w-1 rounded-full bg-blue-400/30"></span>
+    <span class="absolute left-[4%] bottom-[18%] h-1 w-1 rounded-full bg-blue-400/30"></span>
+    <span class="absolute left-[16%] bottom-[8%] h-1.5 w-1.5 rounded-full bg-blue-400/40"></span>
+
+    <span class="absolute right-[7%] top-[12%] h-1.5 w-1.5 rounded-full bg-blue-400/40"></span>
+    <span class="absolute right-[13%] top-[32%] h-1 w-1 rounded-full bg-blue-400/30"></span>
+    <span class="absolute right-[5%] bottom-[20%] h-1 w-1 rounded-full bg-blue-400/30"></span>
+    <span class="absolute right-[17%] bottom-[10%] h-1.5 w-1.5 rounded-full bg-blue-400/40"></span>
+
+    <span class="absolute left-[45%] top-[6%] h-1 w-1 rounded-full bg-blue-400/25"></span>
+    <span class="absolute right-[42%] bottom-[5%] h-1 w-1 rounded-full bg-blue-400/25"></span>
+  </div>
+
+  <div class="relative max-w-7xl mx-auto px-6">
+    <div class="text-center mb-16 fade-in">
+      <h2 class="mb-6 text-4xl font-bold md:text-5xl text-white">
+        ABOUT <span class="text-blue-400">ME</span>
+      </h2>
+      <!-- small dot divider -->
+      <div class="flex items-center justify-center gap-2">
+        <span class="h-1 w-1 rounded-full bg-blue-500/60"></span>
+        <span class="h-1.5 w-1.5 rounded-full bg-blue-400"></span>
+        <span class="h-1 w-1 rounded-full bg-blue-500/60"></span>
+      </div>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div class="space-y-8 fade-in">
+        <div class="space-y-6 text-slate-300 leading-relaxed">
+          <p class="text-lg">
+            I am a developer focused on building modern, reliable, and user-centered digital experiences.
+            My work combines clean interface design with practical engineering to deliver solutions that are both functional and visually strong.
+          </p>
+          <p class="text-lg">
+            I enjoy turning complex ideas into intuitive products, whether it's a responsive website, a web application, or a mobile experience.
+            I value quality, attention to detail, and long-term usability in every project I build.
+          </p>
+        </div>
+      </div>
+
+      <div class="fade-in">
+        <div class="glass-panel relative overflow-hidden rounded-2xl border border-blue-500/20 bg-black/40">
+          <!-- terminal header bar -->
+          <div class="flex items-center gap-2 border-b border-blue-500/20 bg-black/60 px-5 py-3">
+            <span class="h-3 w-3 rounded-full bg-red-500/70"></span>
+            <span class="h-3 w-3 rounded-full bg-yellow-500/70"></span>
+            <span class="h-3 w-3 rounded-full bg-blue-500/70"></span>
+            <span class="ml-3 font-mono text-xs text-slate-500">profile.json</span>
+          </div>
+
+          <!-- label:value rows -->
+          <div class="divide-y divide-blue-500/10 px-6">
+            <div class="relative flex items-center gap-4 py-5">
+              <span class="absolute -left-[9px] h-1.5 w-1.5 rounded-full bg-blue-500/50"></span>
+              <svg class="h-5 w-5 flex-shrink-0 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 21s6-5.2 6-10a6 6 0 1 0-12 0c0 4.8 6 10 6 10Z"></path>
+                <circle cx="12" cy="11" r="2.5"></circle>
+              </svg>
+              <div>
+                <p class="font-mono text-xs uppercase tracking-wider text-blue-400/80">location</p>
+                <p class="mt-1 text-slate-200">Calauan, Laguna, Philippines</p>
+              </div>
+            </div>
+
+            <div class="relative flex items-center gap-4 py-5">
+              <span class="absolute -left-[9px] h-1.5 w-1.5 rounded-full bg-blue-500/50"></span>
+              <svg class="h-5 w-5 flex-shrink-0 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="7 8 3 12 7 16"></polyline>
+                <polyline points="17 8 21 12 17 16"></polyline>
+                <line x1="14" y1="4" x2="10" y2="20"></line>
+              </svg>
+              <div>
+                <p class="font-mono text-xs uppercase tracking-wider text-blue-400/80">specialization</p>
+                <p class="mt-1 text-slate-200">Full-Stack Web &amp; Mobile App Development</p>
+              </div>
+            </div>
+
+            <div class="relative flex items-center gap-4 py-5">
+              <span class="absolute -left-[9px] h-1.5 w-1.5 rounded-full bg-blue-500/50"></span>
+              <svg class="h-5 w-5 flex-shrink-0 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="8"></circle>
+                <path d="M12 6v6l4 2"></path>
+              </svg>
+              <div>
+                <p class="font-mono text-xs uppercase tracking-wider text-blue-400/80">experience</p>
+                <p class="mt-1 text-slate-200">2+ Years Building Practical Digital Products</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- bottom corner dot accent -->
+          <div class="pointer-events-none absolute bottom-3 right-4 flex gap-1 opacity-40">
+            <span class="h-1 w-1 rounded-full bg-blue-400"></span>
+            <span class="h-1 w-1 rounded-full bg-blue-400"></span>
+            <span class="h-1 w-1 rounded-full bg-blue-400"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
