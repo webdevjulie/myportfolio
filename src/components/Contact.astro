@@ -15,7 +15,7 @@
   </div>
 
   <div class="relative max-w-7xl mx-auto px-6">
-    <div class="mb-16 px-8 py-10 text-center fade-in md:px-12">
+    <div class="contact-heading mb-16 px-8 py-10 text-center md:px-12">
       <h2 class="mb-6 text-4xl font-bold md:text-5xl text-white">
         GET IN <span class="text-blue-400">TOUCH</span>
       </h2>
@@ -32,7 +32,7 @@
 
     <div class="grid lg:grid-cols-2 gap-12 items-start">
       <!-- Left: Contact Info -->
-      <div class="space-y-8 fade-in">
+      <div class="contact-left space-y-8">
         <div>
           <h3 class="text-2xl font-bold mb-4 text-blue-300">Let's Connect!</h3>
           <p class="text-gray-400 text-lg leading-relaxed">
@@ -51,7 +51,7 @@
 
           <!-- label:value rows -->
           <div class="divide-y divide-blue-500/10 px-6">
-            <a href="mailto:delosreyesjulieanne199@gmail.com" class="group relative flex items-center gap-4 py-5 transition-colors">
+            <a href="mailto:delosreyesjulieanne199@gmail.com" class="contact-row group relative flex items-center gap-4 py-5 transition-colors">
               <!-- connector node dot -->
               <span class="absolute -left-[9px] h-1.5 w-1.5 rounded-full bg-blue-500/50 group-hover:bg-blue-400 transition-colors"></span>
               <svg class="h-5 w-5 flex-shrink-0 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -64,7 +64,7 @@
               </div>
             </a>
 
-            <a href="tel:09384251369" class="group relative flex items-center gap-4 py-5 transition-colors">
+            <a href="tel:09384251369" class="contact-row group relative flex items-center gap-4 py-5 transition-colors">
               <span class="absolute -left-[9px] h-1.5 w-1.5 rounded-full bg-blue-500/50 group-hover:bg-blue-400 transition-colors"></span>
               <svg class="h-5 w-5 flex-shrink-0 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M7.5 4.5h3a1 1 0 0 1 .97.79l.86 2.58a1 1 0 0 1-.25 1.04l-1.46 1.46a13.5 13.5 0 0 0 5.95 5.95l1.46-1.46a1 1 0 0 1 1.04-.25l2.58.86a1 1 0 0 1 .79.97v3a1 1 0 0 1-1 1A16.5 16.5 0 0 1 4.5 5.5a1 1 0 0 1 1-1Z"></path>
@@ -75,7 +75,7 @@
               </div>
             </a>
 
-            <div class="relative flex items-center gap-4 py-5">
+            <div class="contact-row relative flex items-center gap-4 py-5">
               <span class="absolute -left-[9px] h-1.5 w-1.5 rounded-full bg-blue-500/50"></span>
               <svg class="h-5 w-5 flex-shrink-0 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M12 21s6-5.2 6-10a6 6 0 1 0-12 0c0 4.8 6 10 6 10Z"></path>
@@ -98,7 +98,7 @@
       </div>
 
       <!-- Right: Send Message Form -->
-      <div class="glass-panel relative overflow-hidden rounded-2xl border border-blue-500/20 bg-black/40 fade-in">
+      <div class="contact-right glass-panel relative overflow-hidden rounded-2xl border border-blue-500/20 bg-black/40">
         <!-- terminal header bar, matching the About profile card -->
         <div class="flex items-center gap-2 border-b border-blue-500/20 bg-black/60 px-5 py-3">
           <span class="h-3 w-3 rounded-full bg-red-500/70"></span>
@@ -170,3 +170,97 @@
     </div>
   </div>
 </section>
+
+<script type="module">
+  import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  function initContact() {
+    const section = document.querySelector("#contact");
+    if (!section) return;
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    const heading = section.querySelector(".contact-heading");
+    const left = section.querySelector(".contact-left");
+    const right = section.querySelector(".contact-right");
+    const rows = section.querySelectorAll(".contact-row");
+
+    if (!left || !right) {
+      console.error("Contact: left/right panels not found.");
+      return;
+    }
+
+    if (prefersReducedMotion) {
+      return;
+    }
+
+    if (heading) {
+      gsap.from(heading, {
+        y: 24,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: heading,
+          start: "top 90%",
+          toggleActions: "play none none reverse",
+        },
+      });
+    }
+
+    // Left info card slides in from the left, right form slides in from the right —
+    // they "meet in the middle"
+    gsap.from(left, {
+      x: -50,
+      opacity: 0,
+      duration: 0.8,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: left,
+        start: "top 85%",
+        toggleActions: "play none none reverse",
+      },
+    });
+
+    gsap.from(right, {
+      x: 50,
+      opacity: 0,
+      duration: 0.8,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: right,
+        start: "top 85%",
+        toggleActions: "play none none reverse",
+      },
+    });
+
+    // Individual contact rows (email, phone, location) stagger in slightly after the card
+    if (rows.length) {
+      gsap.from(rows, {
+        y: 12,
+        opacity: 0,
+        duration: 0.5,
+        ease: "power2.out",
+        stagger: 0.1,
+        delay: 0.2,
+        scrollTrigger: {
+          trigger: left,
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      });
+    }
+  }
+
+  if (document.readyState === "complete") {
+    initContact();
+  } else {
+    window.addEventListener("load", initContact);
+  }
+  document.addEventListener("astro:page-load", initContact);
+</script>

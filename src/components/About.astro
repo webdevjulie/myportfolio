@@ -58,7 +58,7 @@
 
           <!-- label:value rows -->
           <div class="divide-y divide-blue-500/10 px-6">
-            <div class="relative flex items-center gap-4 py-5">
+            <div class="profile-row relative flex items-center gap-4 py-5">
               <span class="absolute -left-[9px] h-1.5 w-1.5 rounded-full bg-blue-500/50"></span>
               <svg class="h-5 w-5 flex-shrink-0 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M12 21s6-5.2 6-10a6 6 0 1 0-12 0c0 4.8 6 10 6 10Z"></path>
@@ -70,7 +70,7 @@
               </div>
             </div>
 
-            <div class="relative flex items-center gap-4 py-5">
+            <div class="profile-row relative flex items-center gap-4 py-5">
               <span class="absolute -left-[9px] h-1.5 w-1.5 rounded-full bg-blue-500/50"></span>
               <svg class="h-5 w-5 flex-shrink-0 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="7 8 3 12 7 16"></polyline>
@@ -83,7 +83,7 @@
               </div>
             </div>
 
-            <div class="relative flex items-center gap-4 py-5">
+            <div class="profile-row relative flex items-center gap-4 py-5">
               <span class="absolute -left-[9px] h-1.5 w-1.5 rounded-full bg-blue-500/50"></span>
               <svg class="h-5 w-5 flex-shrink-0 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="12" cy="12" r="8"></circle>
@@ -107,3 +107,70 @@
     </div>
   </div>
 </section>
+
+<script type="module">
+  import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  function initAbout() {
+    const section = document.querySelector("#about");
+    if (!section) return;
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    const fadeEls = section.querySelectorAll(".fade-in");
+    const profileRows = section.querySelectorAll(".profile-row");
+
+    if (!fadeEls.length) {
+      console.error("About: no .fade-in elements found.");
+      return;
+    }
+
+    if (prefersReducedMotion) {
+      return;
+    }
+
+    // Main blocks: heading, left paragraph, profile card
+    fadeEls.forEach((el, i) => {
+      gsap.from(el, {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out",
+        delay: i * 0.1,
+        scrollTrigger: {
+          trigger: el,
+          start: "top 88%",
+          toggleActions: "play none none reverse", // <-- reverses on scroll up
+        },
+      });
+    });
+
+    // Profile card rows
+    if (profileRows.length) {
+      gsap.from(profileRows, {
+        y: 16,
+        opacity: 0,
+        duration: 0.6,
+        ease: "power2.out",
+        stagger: 0.15,
+        scrollTrigger: {
+          trigger: profileRows[0].closest(".glass-panel"),
+          start: "top 80%",
+          toggleActions: "play none none reverse", // <-- reverses on scroll up
+        },
+      });
+    }
+  }
+
+  if (document.readyState === "complete") {
+    initAbout();
+  } else {
+    window.addEventListener("load", initAbout);
+  }
+  document.addEventListener("astro:page-load", initAbout);
+</script>

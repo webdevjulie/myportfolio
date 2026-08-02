@@ -1,22 +1,217 @@
-<footer class="border-t border-white/10 bg-slate-950/35 py-8 backdrop-blur-2xl">
-  <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 text-sm text-slate-400 md:flex-row">
-    <div class="flex items-center gap-3">
-      <span class="relative flex h-2 w-2">
-        <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-75"></span>
-        <span class="relative inline-flex h-2 w-2 rounded-full bg-cyan-400"></span>
-      </span>
-      <p class="font-mono text-xs text-slate-500">
-        <span class="text-slate-400">© 2024 Julie Anne De Los Reyes</span>
-        <span class="text-slate-600"> // available for work</span>
-      </p>
+---
+import {
+  FaFacebook,
+  FaLinkedin,
+  FaPhone,
+  FaLocationDot,
+  FaHtml5,
+  FaCss3Alt,
+  FaPhp,
+  FaReact,
+  FaGitAlt
+} from "react-icons/fa6";
+
+import {
+  SiTailwindcss,
+  SiMysql,
+  SiAstro,
+  SiFigma
+} from "react-icons/si";
+---
+
+<footer id="contact" class="bg-[#000] text-gray-300 pt-16">
+  <div class="mx-auto max-w-7xl px-6">
+
+    <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+
+      <!-- Contact -->
+      <div>
+        <h3 class="text-xl font-bold text-white">
+          Contact Me
+        </h3>
+
+        <div class="mt-2 h-1 w-24 bg-cyan-400 rounded-full"></div>
+
+        <div class="mt-8 space-y-5">
+
+          <div class="flex items-start gap-3">
+            <svg class="mt-1 h-5 w-5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 6h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1Z"/>
+              <path d="m5 8 7 5 7-5"/>
+            </svg>
+            <span>delosreyesjulieanne199@gmail.com</span>
+          </div>
+
+          <div class="flex items-start gap-3">
+            <FaPhone class="mt-1 text-cyan-400" />
+            <span>Available upon request</span>
+          </div>
+
+          <div class="flex items-start gap-3">
+            <FaLocationDot class="mt-1 text-cyan-400" />
+            <span>Calauan, Laguna, Philippines</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+
+        <h3 class="text-xl font-bold text-white">
+          Quick Links
+        </h3>
+
+        <div class="mt-2 h-1 w-24 bg-cyan-400 rounded-full"></div>
+
+        <ul class="mt-8 space-y-4">
+
+          <li><a href="#home" class="hover:text-cyan-400 transition">Home</a></li>
+
+          <li><a href="#about" class="hover:text-cyan-400 transition">About</a></li>
+
+          <li><a href="#projects" class="hover:text-cyan-400 transition">Projects</a></li>
+
+          <li><a href="#skills" class="hover:text-cyan-400 transition">Skills</a></li>
+
+          <li><a href="#contact" class="hover:text-cyan-400 transition">Contact</a></li>
+
+        </ul>
+
+      </div>
+
+      <!-- Tech Stack -->
+      <div>
+
+        <h3 class="text-xl font-bold text-white">
+          Tech Stack
+        </h3>
+
+        <div class="mt-2 h-1 w-24 bg-cyan-400 rounded-full"></div>
+
+        <div class="mt-8 grid grid-cols-2 gap-4">
+
+          <div class="flex items-center gap-2">
+            <FaHtml5 class="text-cyan-400"/>
+            HTML
+          </div>
+
+          <div class="flex items-center gap-2">
+            <FaCss3Alt class="text-cyan-400"/>
+            CSS
+          </div>
+
+          <div class="flex items-center gap-2">
+            <SiTailwindcss class="text-cyan-400"/>
+            Tailwind
+          </div>
+
+          <div class="flex items-center gap-2">
+            <SiAstro class="text-cyan-400"/>
+            Astro
+          </div>
+
+          <div class="flex items-center gap-2">
+            <FaReact class="text-cyan-400"/>
+            React
+          </div>
+
+          <div class="flex items-center gap-2">
+            <FaPhp class="text-cyan-400"/>
+            PHP
+          </div>
+
+          <div class="flex items-center gap-2">
+            <SiMysql class="text-cyan-400"/>
+            MySQL
+          </div>
+
+          <div class="flex items-center gap-2">
+            <FaGitAlt class="text-cyan-400"/>
+            Git
+          </div>
+
+          <div class="flex items-center gap-2">
+            <SiFigma class="text-cyan-400"/>
+            Figma
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Social -->
+      <div>
+
+        <h3 class="text-xl font-bold text-white">
+          Let's Connect
+        </h3>
+
+        <div class="mt-2 h-1 w-24 bg-cyan-400 rounded-full"></div>
+
+        <p class="mt-8 leading-7 text-gray-400">
+          I'm always open to freelance opportunities,
+          collaborations, and full-time
+          web development positions.
+        </p>
+
+        <div class="mt-8 flex gap-5 text-3xl">
+
+          <a
+            href="https://www.facebook.com/lajulieanne/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Facebook"
+            class="hover:text-cyan-400 transition"
+          >
+            <FaFacebook />
+          </a>
+
+          <a
+            href="https://www.linkedin.com/in/julie-anne-de-los-reyes-7281b72b4"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            class="hover:text-cyan-400 transition"
+          >
+            <FaLinkedin/>
+          </a>
+
+          <a
+            href="mailto:delosreyesjulieanne199@gmail.com"
+            aria-label="Email"
+            class="hover:text-cyan-400 transition"
+          >
+            <svg class="h-[1em] w-[1em]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 6h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1Z"/>
+              <path d="m5 8 7 5 7-5"/>
+            </svg>
+          </a>
+
+        </div>
+
+      </div>
+
     </div>
 
-    <nav class="flex items-center gap-1 font-mono text-xs text-slate-500">
-      <a href="#home" class="rounded px-2 py-1 transition hover:text-cyan-400">Top</a>
-      <span class="text-slate-700">/</span>
-      <a href="#projects" class="rounded px-2 py-1 transition hover:text-cyan-400">Projects</a>
-      <span class="text-slate-700">/</span>
-      <a href="#contact" class="rounded px-2 py-1 transition hover:text-cyan-400">Contact</a>
-    </nav>
+    <!-- Bottom -->
+
+    <div class="mt-16 border-t border-white/10 py-8">
+
+      <div class="flex flex-col items-center justify-between gap-4 text-center text-gray-500 md:flex-row">
+
+        <p>
+          © 2026 Julie Anne De Los Reyes. All Rights Reserved.
+        </p>
+
+        <p>
+          Designed & Developed with
+          <span class="text-cyan-400"> Astro + Tailwind CSS</span>
+        </p>
+
+      </div>
+
+    </div>
+
   </div>
 </footer>

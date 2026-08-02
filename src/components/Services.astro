@@ -20,12 +20,11 @@
   </div>
 
   <div class="relative mx-auto max-w-7xl px-6">
-    <div class="mb-16 text-center">
+    <div class="services-heading reveal mb-16 text-center">
       <h2 class="mb-6 text-4xl font-bold md:text-5xl text-white">
         WHAT I <span class="text-blue-400">DO</span>
       </h2>
-      <p class="text-lg text-slate-400">Two crafts, one connective thread: APIs that make them talk to the world</p>
-      <!-- small dot divider under subtitle -->
+
       <div class="mt-6 flex items-center justify-center gap-2">
         <span class="h-1 w-1 rounded-full bg-blue-500/60"></span>
         <span class="h-1.5 w-1.5 rounded-full bg-blue-400"></span>
@@ -36,7 +35,7 @@
     <div class="relative grid gap-8 lg:grid-cols-[1fr_auto_1fr] lg:items-stretch">
 
       <!-- WEB DEVELOPMENT PANEL -->
-      <div class="group relative rounded-3xl border border-slate-800/70 bg-slate-900/50 p-10 shadow-2xl shadow-blue-950/20 backdrop-blur transition-all duration-300 hover:border-blue-400/50">
+      <div class="service-panel-left reveal reveal-left group relative rounded-3xl border border-slate-800/70 bg-slate-900/50 p-10 shadow-2xl shadow-blue-950/20 backdrop-blur transition-colors duration-300 hover:border-blue-400/50">
         <div class="mb-8 flex items-center gap-4">
           <div class="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-xl border border-blue-500/20 bg-blue-500/10">
             <svg class="h-7 w-7 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -58,7 +57,6 @@
           <span class="rounded-full border border-slate-700 bg-slate-800/60 px-3 py-1.5 text-xs font-medium text-slate-300">Databases</span>
         </div>
 
-        <!-- bottom corner dot accent -->
         <div class="pointer-events-none absolute bottom-4 right-5 flex gap-1 opacity-40">
           <span class="h-1 w-1 rounded-full bg-blue-400"></span>
           <span class="h-1 w-1 rounded-full bg-blue-400"></span>
@@ -67,12 +65,10 @@
       </div>
 
       <!-- CONNECTOR: API INTEGRATION -->
-      <div class="relative flex items-center justify-center py-4 lg:py-0">
-        <!-- vertical/horizontal line -->
+      <div class="service-connector reveal reveal-pop relative flex items-center justify-center py-4 lg:py-0">
         <div class="absolute h-full w-px bg-gradient-to-b from-transparent via-blue-500/40 to-transparent lg:block hidden"></div>
         <div class="absolute w-full h-px bg-gradient-to-r from-transparent via-blue-500/40 to-transparent lg:hidden block"></div>
 
-        <!-- traveling dots along the line, for balance -->
         <div class="absolute hidden lg:flex h-full w-px flex-col items-center justify-between py-2">
           <span class="h-1.5 w-1.5 rounded-full bg-blue-400/60"></span>
           <span class="h-1.5 w-1.5 rounded-full bg-blue-400/60"></span>
@@ -92,7 +88,7 @@
       </div>
 
       <!-- MOBILE APP DEVELOPMENT PANEL -->
-      <div class="group relative rounded-3xl border border-slate-800/70 bg-slate-900/50 p-10 shadow-2xl shadow-blue-950/20 backdrop-blur transition-all duration-300 hover:border-blue-400/50">
+      <div class="service-panel-right reveal reveal-right group relative rounded-3xl border border-slate-800/70 bg-slate-900/50 p-10 shadow-2xl shadow-blue-950/20 backdrop-blur transition-colors duration-300 hover:border-blue-400/50">
         <div class="mb-8 flex items-center gap-4">
           <div class="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-xl border border-blue-500/20 bg-blue-500/10">
             <svg class="h-7 w-7 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -113,7 +109,6 @@
           <span class="rounded-full border border-slate-700 bg-slate-800/60 px-3 py-1.5 text-xs font-medium text-slate-300">Play Store / App Store</span>
         </div>
 
-        <!-- bottom corner dot accent -->
         <div class="pointer-events-none absolute bottom-4 right-5 flex gap-1 opacity-40">
           <span class="h-1 w-1 rounded-full bg-blue-400"></span>
           <span class="h-1 w-1 rounded-full bg-blue-400"></span>
@@ -123,4 +118,104 @@
 
     </div>
   </div>
+
+  <style>
+    /* Default: fully visible. JS only ADDS the hidden starting state
+       right before observing, so if JS fails to load, content still shows. */
+    .reveal {
+      opacity: 1;
+      transform: none;
+    }
+
+    .reveal.reveal-init {
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.reveal-init.reveal-left {
+      opacity: 0;
+      transform: translateX(-60px);
+    }
+
+    .reveal.reveal-init.reveal-right {
+      opacity: 0;
+      transform: translateX(60px);
+    }
+
+    .reveal.reveal-init.reveal-pop {
+      opacity: 0;
+      transform: scale(0.85);
+    }
+
+    .reveal.reveal-init:not(.reveal-left):not(.reveal-right):not(.reveal-pop) {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+
+    .reveal.reveal-visible {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal.reveal-init {
+        transition: none;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+  </style>
 </section>
+
+<script type="module">
+  function initServices() {
+    const section = document.querySelector("#services");
+    if (!section) return;
+
+    const reveals = section.querySelectorAll(".reveal");
+    if (!reveals.length) return;
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    // If motion is reduced, or IntersectionObserver isn't supported,
+    // just leave everything visible (default CSS state) — no animation.
+    if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+      return;
+    }
+
+    // Arm the hidden starting state only once JS confirms it can animate.
+    reveals.forEach((el) => el.classList.add("reveal-init"));
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("reveal-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.15,
+        rootMargin: "0px 0px -10% 0px",
+      }
+    );
+
+    reveals.forEach((el) => observer.observe(el));
+
+    // Failsafe: in case an element never intersects (e.g. it's already
+    // fully in view above the observer's first check on some browsers),
+    // force everything visible after a short delay.
+    setTimeout(() => {
+      reveals.forEach((el) => el.classList.add("reveal-visible"));
+    }, 2500);
+  }
+
+  if (document.readyState === "complete") {
+    initServices();
+  } else {
+    window.addEventListener("load", initServices);
+  }
+  document.addEventListener("astro:page-load", initServices);
+</script>
