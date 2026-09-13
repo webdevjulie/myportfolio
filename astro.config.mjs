@@ -5,6 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   site: "https://webdevjulie.github.io",
   base: "/myportfolio/",
+  output: "static",
 
   devToolbar: {
     enabled: false,
