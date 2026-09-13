@@ -1,25 +1,31 @@
-<nav class="fixed top-4 left-1/2 z-50 w-[92%] max-w-5xl -translate-x-1/2 rounded-2xl border border-cyan-400/20 bg-slate-950/50 shadow-[0_0_40px_-15px_rgba(34,211,238,0.4)] backdrop-blur-2xl">
-  <div class="flex items-center justify-between px-6 py-3.5">
-    <a href="#home" class="group flex items-center gap-0.5 font-mono text-lg font-bold tracking-tight text-white">
-      <span class="text-cyan-400 transition-transform group-hover:-translate-x-0.5">&lt;</span>
-      Julie
-      <span class="text-cyan-400 transition-transform group-hover:translate-x-0.5">/&gt;</span>
+<nav class="fixed left-4 top-1/2 z-50 h-auto w-auto -translate-y-1/2 rounded-2xl border border-cyan-400/20 bg-slate-950/50 shadow-[0_0_40px_-15px_rgba(34,211,238,0.4)] backdrop-blur-2xl">
+  <div class="flex flex-col items-center justify-between gap-8 px-6 py-8">
+    <a href="#home" class="group flex flex-col items-center gap-1.5 font-bold tracking-tight text-white hover:text-blue-400 transition-colors">
+      <div class="flex items-center justify-center h-10 w-10 rounded-lg border border-blue-400 bg-blue-400/10">
+        <svg class="h-5 w-5 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="7 8 3 12 7 16"></polyline>
+          <polyline points="17 8 21 12 17 16"></polyline>
+          <line x1="14" y1="4" x2="10" y2="20"></line>
+        </svg>
+      </div>
+      <span class="text-[10px] uppercase tracking-wider font-semibold">Julie</span>
     </a>
 
-    <div id="nav-links" class="relative hidden items-center gap-8 md:flex">
+    <div id="nav-links" class="relative hidden flex-col items-center gap-8 md:flex">
       <a href="#about" class="nav-link" data-index="01"><span class="link-text">About</span></a>
       <a href="#projects" class="nav-link" data-index="02"><span class="link-text">Projects</span></a>
       <a href="#services" class="nav-link" data-index="03"><span class="link-text">Services</span></a>
       <a href="#contact" class="nav-link" data-index="04"><span class="link-text">Contact</span></a>
       <!-- <a href="#faqs" class="nav-link" data-index="05"><span class="link-text">FAQs</span></a> -->
 
-      <!-- shared morphing underline -->
-      <span id="magnetic-indicator" class="pointer-events-none absolute bottom-[-6px] left-0 h-[1.5px] w-0 rounded-full bg-cyan-400 opacity-0 shadow-[0_0_8px_1px_rgba(34,211,238,0.6)] transition-[opacity] duration-200"></span>
+      <!-- shared morphing indicator (vertical) -->
+      <span id="magnetic-indicator" class="pointer-events-none absolute left-[-6px] h-0 w-[1.5px] rounded-full bg-cyan-400 opacity-0 shadow-[0_0_8px_1px_rgba(34,211,238,0.6)] transition-[opacity] duration-200"></span>
     </div>
 
     <!-- Mobile menu button -->
     <button id="menu-btn" class="relative flex h-8 w-8 flex-col items-center justify-center gap-[5px] md:hidden" aria-label="Open menu" aria-expanded="false">
       <span id="bar-top" class="h-[2px] w-6 origin-center rounded-full bg-cyan-400 transition-transform duration-300"></span>
+      <span id="bar-middle" class="h-[2px] w-6 origin-center rounded-full bg-cyan-400 transition-opacity duration-300"></span>
       <span id="bar-bottom" class="h-[2px] w-6 origin-center rounded-full bg-cyan-400 transition-transform duration-300"></span>
     </button>
   </div>
@@ -40,7 +46,8 @@
   .nav-link {
     position: relative;
     display: flex;
-    align-items: baseline;
+    flex-direction: column;
+    align-items: center;
     gap: 6px;
     font-size: 0.875rem;
     font-weight: 500;
@@ -68,8 +75,8 @@
   }
 
   #magnetic-indicator {
-    transition: left 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-                width 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    transition: top 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                height 0.35s cubic-bezier(0.22, 1, 0.36, 1),
                 opacity 0.2s ease;
   }
 
@@ -101,7 +108,7 @@
 </style>
 
 <script>
-  // ---- Magnetic underline + text pull (desktop nav) ----
+  // ---- Magnetic indicator + text pull (vertical nav) ----
   const navLinksContainer = document.getElementById('nav-links');
   const indicator = document.getElementById('magnetic-indicator');
 
@@ -113,8 +120,8 @@
     const moveIndicatorTo = (el: HTMLElement) => {
       const containerRect = navLinksContainer.getBoundingClientRect();
       const rect = el.getBoundingClientRect();
-      indicator.style.left = `${rect.left - containerRect.left}px`;
-      indicator.style.width = `${rect.width}px`;
+      indicator.style.top = `${rect.top - containerRect.top}px`;
+      indicator.style.height = `${rect.height}px`;
       indicator.style.opacity = '1';
     };
 
@@ -154,14 +161,16 @@
   const menuBtn = document.getElementById('menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
   const barTop = document.getElementById('bar-top');
+  const barMiddle = document.getElementById('bar-middle');
   const barBottom = document.getElementById('bar-bottom');
 
-  if (menuBtn && mobileMenu && barTop && barBottom) {
+  if (menuBtn && mobileMenu && barTop && barMiddle && barBottom) {
     const closeMenu = () => {
       mobileMenu.classList.remove('is-open');
       mobileMenu.classList.add('pointer-events-none');
       mobileMenu.style.opacity = '0';
       barTop.style.transform = 'none';
+      barMiddle.style.opacity = '1';
       barBottom.style.transform = 'none';
       menuBtn.setAttribute('aria-expanded', 'false');
     };
@@ -172,6 +181,7 @@
       void mobileMenu.offsetWidth;
       mobileMenu.classList.add('is-open');
       barTop.style.transform = 'translateY(3.5px) rotate(45deg)';
+      barMiddle.style.opacity = '0';
       barBottom.style.transform = 'translateY(-3.5px) rotate(-45deg)';
       menuBtn.setAttribute('aria-expanded', 'true');
     };
