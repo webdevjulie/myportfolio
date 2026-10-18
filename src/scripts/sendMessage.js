@@ -11,6 +11,8 @@ export async function initMessageForm() {
   const errorMessage = document.getElementById('error-message');
 
   if (!form || !submitBtn) return;
+  if (form.dataset.messageFormInitialized === 'true') return;
+  form.dataset.messageFormInitialized = 'true';
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -51,7 +53,12 @@ export async function initMessageForm() {
       console.error('Error sending message:', error);
       submitBtn.textContent = 'Send Message';
       submitBtn.disabled = false;
-      showError('Failed to send message. Please try again or contact us directly.', errorMessage, successMessage);
+      const message = error instanceof TypeError
+        ? 'Could not connect to the message service. Check your internet connection and try again.'
+        : error instanceof Error && error.message
+          ? error.message
+          : 'Failed to send message. Please try again or contact us directly.';
+      showError(message, errorMessage, successMessage);
     }
   });
 }
@@ -74,7 +81,7 @@ function validateForm(data) {
  * No backend required - works on GitHub Pages!
  */
 async function sendViaFormspree(data) {
-  const formspreeId = 'mvkojglb'; // Your Formspree ID
+  const formspreeId = import.meta.env.VITE_FORMSPREE_ID || 'mvkojglb';
   
   try {
     console.log('Sending to Formspree:', formspreeId);
@@ -93,6 +100,18 @@ async function sendViaFormspree(data) {
     });
 
     console.log('Formspree response status:', response.status);
+    if (!response.ok) {
+      let detail = '';
+      try {
+        const result = await response.json();
+        detail = Array.isArray(result.errors)
+          ? result.errors.map((item) => item.message).filter(Boolean).join(' ')
+          : '';
+      } catch {
+        // Use the HTTP status when Formspree does not return a JSON error body.
+      }
+      throw new Error(detail || `The message service rejected the request (HTTP ${response.status}).`);
+    }
     return response;
   } catch (error) {
     console.error('Formspree error:', error);

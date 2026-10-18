@@ -198,6 +198,8 @@
     const section = document.querySelector("#contact");
     if (!section) return;
 
+    initMessageForm();
+
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
@@ -272,9 +274,6 @@
         },
       });
     }
-
-    // Initialize message form handling
-    initMessageForm();
   }
 
   if (document.readyState === "complete") {
