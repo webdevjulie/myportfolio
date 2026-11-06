@@ -92,13 +92,34 @@
   }
 </style>
 
-<script>
-  window.addEventListener("load", () => {
-    const loadingScreen = document.getElementById("loading-screen");
-    // extra delay so the whole sequence (text slide + spinner) is visible
-    setTimeout(() => {
-      loadingScreen?.classList.add("hide");
-      document.body.style.overflow = "auto";
-    }, 2200);
-  });
+<script is:inline>
+  (() => {
+    let hideTimer;
+    let failsafeTimer;
+    let isHidden = false;
+
+    const hideLoadingScreen = () => {
+      if (isHidden) return;
+      isHidden = true;
+      window.clearTimeout(hideTimer);
+      window.clearTimeout(failsafeTimer);
+      document.getElementById("loading-screen")?.classList.add("hide");
+      document.body.style.overflow = "";
+    };
+
+    const startHideTimer = () => {
+      if (hideTimer) return;
+      // Start after HTML is ready instead of waiting for every mobile resource to load.
+      hideTimer = window.setTimeout(hideLoadingScreen, 2200);
+    };
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", startHideTimer, { once: true });
+    } else {
+      startHideTimer();
+    }
+
+    window.addEventListener("load", startHideTimer, { once: true });
+    failsafeTimer = window.setTimeout(hideLoadingScreen, 5000);
+  })();
 </script>

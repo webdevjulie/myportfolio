@@ -1,6 +1,6 @@
-<nav class="fixed left-4 top-1/2 z-50 h-auto w-auto -translate-y-1/2 rounded-2xl border border-cyan-400/20 bg-slate-950/50 shadow-[0_0_40px_-15px_rgba(34,211,238,0.4)] backdrop-blur-2xl">
-  <div class="flex flex-col items-center justify-between gap-8 px-6 py-8">
-    <a href="#home" class="group flex flex-col items-center gap-1.5 font-bold tracking-tight text-white hover:text-blue-400 transition-colors">
+<nav class="fixed top-4 left-1/2 z-50 h-auto w-[calc(100%-2rem)] max-w-sm -translate-x-1/2 rounded-2xl border border-cyan-400/20 bg-slate-950/80 shadow-[0_0_40px_-15px_rgba(34,211,238,0.4)] backdrop-blur-2xl md:top-1/2 md:left-4 md:w-auto md:max-w-none md:-translate-x-0 md:-translate-y-1/2 md:bg-slate-950/50">
+  <div class="flex flex-row items-center justify-between gap-4 px-5 py-3 md:flex-col md:gap-8 md:px-6 md:py-8">
+    <a href="#home" class="group flex flex-row items-center gap-2 font-bold tracking-tight text-white transition-colors hover:text-blue-400 md:flex-col md:gap-1.5">
       <div class="flex items-center justify-center h-10 w-10 rounded-lg border border-blue-400 bg-blue-400/10">
         <svg class="h-5 w-5 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="7 8 3 12 7 16"></polyline>
@@ -23,7 +23,7 @@
     </div>
 
     <!-- Mobile menu button -->
-    <button id="menu-btn" class="relative flex h-8 w-8 flex-col items-center justify-center gap-[5px] md:hidden" aria-label="Open menu" aria-expanded="false">
+    <button id="menu-btn" class="relative flex h-10 w-10 flex-col items-center justify-center gap-[5px] md:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
       <span id="bar-top" class="h-[2px] w-6 origin-center rounded-full bg-cyan-400 transition-transform duration-300"></span>
       <span id="bar-middle" class="h-[2px] w-6 origin-center rounded-full bg-cyan-400 transition-opacity duration-300"></span>
       <span id="bar-bottom" class="h-[2px] w-6 origin-center rounded-full bg-cyan-400 transition-transform duration-300"></span>
@@ -169,6 +169,7 @@
       mobileMenu.classList.remove('is-open');
       mobileMenu.classList.add('pointer-events-none');
       mobileMenu.style.opacity = '0';
+      document.body.style.overflow = '';
       barTop.style.transform = 'none';
       barMiddle.style.opacity = '1';
       barBottom.style.transform = 'none';
@@ -178,6 +179,7 @@
     const openMenu = () => {
       mobileMenu.classList.remove('pointer-events-none');
       mobileMenu.style.opacity = '1';
+      document.body.style.overflow = 'hidden';
       void mobileMenu.offsetWidth;
       mobileMenu.classList.add('is-open');
       barTop.style.transform = 'translateY(3.5px) rotate(45deg)';
@@ -189,6 +191,13 @@
     menuBtn.addEventListener('click', () => {
       const isOpen = mobileMenu.classList.contains('is-open');
       isOpen ? closeMenu() : openMenu();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && mobileMenu.classList.contains('is-open')) {
+        closeMenu();
+        menuBtn.focus();
+      }
     });
 
     mobileMenu.querySelectorAll('a').forEach(link => {
