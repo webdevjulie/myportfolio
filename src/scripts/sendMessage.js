@@ -81,42 +81,43 @@ function validateForm(data) {
  * No backend required - works on GitHub Pages!
  */
 async function sendViaFormspree(data) {
-  const formspreeId = import.meta.env.VITE_FORMSPREE_ID || 'mvkojglb';
-  
-  try {
-    console.log('Sending to Formspree:', formspreeId);
-    
-    const response = await fetch(`https://formspree.io/f/${formspreeId}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-      body: JSON.stringify({
-        name: data.name,
-        email: data.email,
-        message: data.message,
-      }),
-    });
-
-    console.log('Formspree response status:', response.status);
-    if (!response.ok) {
-      let detail = '';
-      try {
-        const result = await response.json();
-        detail = Array.isArray(result.errors)
-          ? result.errors.map((item) => item.message).filter(Boolean).join(' ')
-          : '';
-      } catch {
-        // Use the HTTP status when Formspree does not return a JSON error body.
-      }
-      throw new Error(detail || `The message service rejected the request (HTTP ${response.status}).`);
-    }
-    return response;
-  } catch (error) {
-    console.error('Formspree error:', error);
-    throw error;
+  const formspreeId = import.meta.env.VITE_FORMSPREE_ID?.trim();
+  if (!formspreeId || formspreeId === 'your_formspree_form_id') {
+    throw new Error('The contact form is not configured. Please email us directly.');
   }
+
+  const response = await fetch(`https://formspree.io/f/${formspreeId}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+    body: JSON.stringify({
+      name: data.name,
+      email: data.email,
+      message: data.message,
+    }),
+  });
+
+  if (!response.ok) {
+    let detail = '';
+    try {
+      const result = await response.json();
+      detail = Array.isArray(result.errors)
+        ? result.errors.map((item) => item.message).filter(Boolean).join(' ')
+        : '';
+    } catch {
+      // Use a status-specific message when Formspree does not return JSON.
+    }
+
+    if (response.status === 403) {
+      throw new Error(detail || 'Formspree blocked this message. Check that the form is active and your website domain is allowed in Formspree settings.');
+    }
+
+    throw new Error(detail || `The message service rejected the request (HTTP ${response.status}).`);
+  }
+
+  return response;
 }
 
 /**

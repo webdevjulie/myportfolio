@@ -107,6 +107,7 @@
             <span class="rounded-full border border-blue-500/30 bg-blue-500/10 px-3 py-1 text-xs text-blue-300">Tailwind CSS</span>
             <span class="rounded-full border border-blue-500/30 bg-blue-500/10 px-3 py-1 text-xs text-blue-300">PHP</span>
             <span class="rounded-full border border-blue-500/30 bg-blue-500/10 px-3 py-1 text-xs text-blue-300">MySQL</span>
+            <span class="rounded-full border border-blue-500/30 bg-blue-500/10 px-3 py-1 text-xs text-blue-300">Xendit API</span>
           </div>
           <a href="https://astranetph.net" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 font-semibold text-blue-400 transition-colors hover:text-blue-300">
             View Project
@@ -199,6 +200,7 @@
             <span class="rounded-full border border-sky-500/30 bg-sky-500/10 px-3 py-1 text-xs text-sky-300">Tailwind CSS</span>
             <span class="rounded-full border border-sky-500/30 bg-sky-500/10 px-3 py-1 text-xs text-sky-300">PHP</span>
             <span class="rounded-full border border-sky-500/30 bg-sky-500/10 px-3 py-1 text-xs text-sky-300">MySQL</span>
+            <span class="rounded-full border border-sky-500/30 bg-sky-500/10 px-3 py-1 text-xs text-sky-300">Stripe API</span>
           </div>
           <a href="https://wipedcleaningservices.ca/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 font-semibold text-sky-400 transition-colors hover:text-sky-300">
             Visit Website
@@ -420,7 +422,7 @@
 
   function initProjects() {
     const section = document.querySelector("#projects");
-    if (!section) return;
+    if (!section || section.dataset.projectsInitialized === "true") return;
 
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
@@ -433,6 +435,8 @@
       console.error("Projects: no .project-card elements found.");
       return;
     }
+
+    section.dataset.projectsInitialized = "true";
 
     if (prefersReducedMotion) {
       return;

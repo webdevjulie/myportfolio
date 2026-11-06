@@ -199,6 +199,7 @@
     if (!section) return;
 
     initMessageForm();
+    if (section.dataset.contactAnimationsInitialized === "true") return;
 
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
@@ -213,6 +214,8 @@
       console.error("Contact: left/right panels not found.");
       return;
     }
+
+    section.dataset.contactAnimationsInitialized = "true";
 
     if (prefersReducedMotion) {
       return;

@@ -216,6 +216,9 @@
   }
 
   function initHero() {
+    const section = document.querySelector("#home");
+    if (!section || section.dataset.heroInitialized === "true") return;
+
     const greeting = document.querySelector(".hero-greeting");
     const titleEl = document.querySelector(".hero-title");
     const line1 = document.querySelector(".hero-title-line1");
@@ -228,6 +231,8 @@
       console.error("Hero: one or more text elements not found in DOM yet.");
       return;
     }
+
+    section.dataset.heroInitialized = "true";
 
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"

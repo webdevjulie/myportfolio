@@ -34,6 +34,8 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Build Astro
+        env:
+          VITE_FORMSPREE_ID: ${{ vars.VITE_FORMSPREE_ID }}
         run: npm run build
 
       - name: Upload artifact
